@@ -1,0 +1,43 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    strategy:
+      matrix:
+        node-version: ["24.x", "22.x", "20.x"]
+
+    steps:
+      - uses: actions/checkout@v5.0.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v5.0.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rebuild assets
+        run: make -B clean dist/london-time.js dist/london-time.min.js dist/london-time.d.ts
+
+      - name: Run tests
+        run: make test
+
+      # Don't allow the check to pass if the minified js has changed
+      # compared to what's committed - indicates manual remediation
+      # required, and possibly a new npm release.
+      - name: Ensure assets are deterministic and have no changes
+        run: |
+          [ $(git diff --name-only dist/london-time.js | wc -l) -eq 0 ]
+          [ $(git diff --name-only dist/london-time.min.js | wc -l) -eq 0 ]
+          [ $(git diff --name-only dist/london-time.d.ts | wc -l) -eq 0 ]

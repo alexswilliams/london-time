@@ -1,0 +1,44 @@
+name: Publish Package to npmjs
+on:
+  release:
+    types: [created]
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+    
+    steps:
+      - uses: actions/checkout@v5.0.0
+      - uses: actions/setup-node@v5.0.0
+        with:
+          node-version: "22.x"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rebuild assets
+        run: make -B clean dist/london-time.min.js dist/london-time.js dist/london-time.d.ts
+
+      - name: Run tests
+        run: make test
+
+      # Don't allow the check to pass if the minified js has changed
+      # compared to what's committed - indicates manual remediation
+      # required, and possibly a new npm release.
+      - name: Ensure assets are deterministic and have no changes
+        run: |
+          [ $(git diff --name-only dist/london-time.js | wc -l) -eq 0 ]
+          [ $(git diff --name-only dist/london-time.min.js | wc -l) -eq 0 ]
+          [ $(git diff --name-only dist/london-time.d.ts | wc -l) -eq 0 ]
+
+      - name: Generate artefact attestation
+        uses: actions/attest-build-provenance@v3.0.0
+        with:
+          subject-path: 'dist/london-time.js,dist/london-time.min.js'
+        
+      - run: make release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

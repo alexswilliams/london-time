@@ -1,0 +1,29 @@
+{
+  "name": "london-time",
+  "version": "0.0.1",
+  "description": "Parser and formatter for switching between London and UTC dates, times and instants, without dependencies such as Intl or Moment",
+  "main": "london-time.min.js",
+  "types": "london-time.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexswilliams/london-time.git"
+  },
+  "keywords": [
+    "london",
+    "utc",
+    "europe/london",
+    "utils",
+    "formatter",
+    "converter",
+    "datetime",
+    "instant",
+    "local"
+  ],
+  "author": "Alex Williams <lexw@live.co.uk> (https://github.com/alexswilliams)",
+  "license": "MIT",
+  "bugs": "https://github.com/alexswilliams/london-time/issues",
+  "scripts": {
+    "prepublishOnly": "cp -f ../README.md ./",
+    "postpublish": "rm -f README.md"
+  }
+}
