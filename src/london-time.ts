@@ -1,15 +1,12 @@
 'use strict'
 
-import { sakamotoDayOfWeek } from './day-of-week'
+import { findDayOfWeek } from './day-of-week'
 import { daysInMonth } from './leap-years'
 import { utcInstantToParts } from './parse'
 
 export function utcTimestampToLondonDate(utcInstant: string): string {
-  if (typeof utcInstant !== 'string') throw TypeError('UTC Timestamp must be a string')
   const parts = utcInstantToParts(utcInstant)
-
   const utcToday = `${parts.year}-${zeroPad(parts.month)}-${zeroPad(parts.day)}`
-
   const isDst = isUtcInstantInLondonDST(parts.year, parts.month, parts.day, parts.hour)
   if (!isDst) return utcToday
   if (isDst && parts.hour < 23) return utcToday
@@ -25,7 +22,7 @@ function isUtcInstantInLondonDST(utcYear: number, utcMonth: number, utcDay: numb
   if (utcMonth < 3 || utcMonth > 10) return false
   if (utcMonth > 3 || utcDay < 10) return true
 
-  const dayOfWeek = sakamotoDayOfWeek(utcYear, utcMonth, utcDay)
+  const dayOfWeek = findDayOfWeek(utcYear, utcMonth, utcDay)
   // have not yet reached last week of month
   if (utcMonth === 3 && utcDay - dayOfWeek < 25) return false
   if (utcMonth === 10 && utcDay - dayOfWeek < 25) return true

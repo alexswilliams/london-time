@@ -1,1 +1,1 @@
-{"version":3,"file":"day-of-week.d.ts","sourceRoot":"","sources":["../src/day-of-week.ts"],"names":[],"mappings":"AACA,wBAAgB,iBAAiB,CAAC,MAAM,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,EAAE,GAAG,EAAE,MAAM,GAAG,MAAM,CAKpF"}
+{"version":3,"file":"day-of-week.d.ts","sourceRoot":"","sources":["../src/day-of-week.ts"],"names":[],"mappings":"AAGA,wBAAgB,aAAa,CAAC,IAAI,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,EAAE,GAAG,EAAE,MAAM,GAAG,MAAM,CAM9E"}

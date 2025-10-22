@@ -6,7 +6,8 @@
   "scripts": {
     "src:build": "tsc --project tsconfig.json",
     "src:minify": "esbuild src/london-time.ts --minify --sourcemap --format=cjs --outfile=dist/london-time.min.js --target=chrome90,edge91,firefox89,ios14.0,safari14,node18 --analyze",
-    "src:test": "jest src/**.test.*"
+    "src:test": "jest src/**.test.*",
+    "test": "npm run src:test"
   },
   "workspaces": [
     "src",

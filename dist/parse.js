@@ -18,7 +18,7 @@ export function utcInstantToParts(utcInstant) {
     // - partial years (e.g. 25-10-09)
     // - times omitting T prefix (e.g. 20251009093500)
     // - times omitting minutes and seconds (because e.g. T10:59.5 becomes T10:59:30 which is not immediately obvious)
-    const rx = /^(<?year>[0-9]{4})-?(<?month>[0-9]{2})-?(<?day>[0-9]{2})T(<?hour>[0-9]{2}):?(<?minute>[0-9]{2}):?(<?second>[0-9]{2})(<?rest>.*)$/;
+    const rx = /(?<year>[0-9]{4})-?(?<month>[0-9]{2})-?(?<day>[0-9]{2})T(?<hour>[0-9]{2}):?(?<minute>[0-9]{2}):?(?<second>[0-9]{2})(?<rest>.*)/;
     const matches = (_a = utcInstant.match(rx)) === null || _a === void 0 ? void 0 : _a.groups;
     if (!matches)
         throw Error(`Error parsing UTC Instant: ${utcInstant}`);
@@ -32,7 +32,7 @@ export function utcInstantToParts(utcInstant) {
         fractional: '',
     };
     if (matches.rest) {
-        const restGroups = (_b = matches.rest.match(/(<?frac>\.[0-9]+)?(Z|\+00:?00|\+00)?^/)) === null || _b === void 0 ? void 0 : _b.groups;
+        const restGroups = (_b = matches.rest.match(/(?<frac>\.[0-9]+)?(Z|\+00:?00|\+00)?^/)) === null || _b === void 0 ? void 0 : _b.groups;
         if (!restGroups)
             throw Error(`Error parsing UTC Instant: ${utcInstant}, specifically ${matches.rest}`);
         if (restGroups.frac)

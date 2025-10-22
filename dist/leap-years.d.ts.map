@@ -1,1 +1,1 @@
-{"version":3,"file":"leap-years.d.ts","sourceRoot":"","sources":["../src/leap-years.ts"],"names":[],"mappings":"AAGA,wBAAgB,WAAW,CAAC,IAAI,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,GAAG,MAAM,CAE/D;AAED,wBAAgB,UAAU,CAAC,IAAI,EAAE,MAAM,WAEtC"}
+{"version":3,"file":"leap-years.d.ts","sourceRoot":"","sources":["../src/leap-years.ts"],"names":[],"mappings":"AAGA,wBAAgB,WAAW,CAAC,IAAI,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,GAAG,MAAM,CAE/D;AAED,wBAAgB,UAAU,CAAC,IAAI,EAAE,MAAM,WAGtC"}

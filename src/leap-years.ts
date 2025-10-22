@@ -6,5 +6,6 @@ export function daysInMonth(year: number, month: number): number {
 }
 
 export function isLeapYear(year: number) {
+  if (year <= 1752) throw RangeError('Years before the adoption of the Gregorian calendar in London are not supported')
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 }
