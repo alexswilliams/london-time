@@ -26,36 +26,43 @@ describe('sakomotoDayOfWeek', () => {
     }
   })
 
-  test('All dates in a regular leap-year produce the same day of the week as cal outputs', () => {
-    const dates = datesInYear2020
-    for (const date of dates) {
-      const year = Number(date.date.slice(0, 4)!)
-      const month = Number(date.date.slice(5, 7)!)
-      const day = Number(date.date.slice(8, 10)!)
-      const actual = findDayOfWeek(year, month, day)
-      expect(actual).toEqual(Weekday[date.dayOfWeek])
-    }
+  describe('Leap Years', () => {
+    test('All dates in a regular leap-year produce the same day of the week as cal outputs', () => {
+      const dates = datesInYear2020
+      for (const date of dates) {
+        const year = Number(date.date.slice(0, 4)!)
+        const month = Number(date.date.slice(5, 7)!)
+        const day = Number(date.date.slice(8, 10)!)
+        const actual = findDayOfWeek(year, month, day)
+        expect(actual).toEqual(Weekday[date.dayOfWeek])
+      }
+    })
+
+    test('All dates in an exempt leap-year (divisible by 4 and 100 but not 400) produce the same day of the week as cal outputs', () => {
+      const dates = datesInYear1900
+      for (const date of dates) {
+        const year = Number(date.date.slice(0, 4)!)
+        const month = Number(date.date.slice(5, 7)!)
+        const day = Number(date.date.slice(8, 10)!)
+        const actual = findDayOfWeek(year, month, day)
+        expect(actual).toEqual(Weekday[date.dayOfWeek])
+      }
+    })
+
+    test('All dates in a leap year divisible by 400 produce the same day of the week as cal outputs', () => {
+      const dates = datesInYear2000
+      for (const date of dates) {
+        const year = Number(date.date.slice(0, 4)!)
+        const month = Number(date.date.slice(5, 7)!)
+        const day = Number(date.date.slice(8, 10)!)
+        const actual = findDayOfWeek(year, month, day)
+        expect(actual).toEqual(Weekday[date.dayOfWeek])
+      }
+    })
   })
 
-  test('All dates in an exempt leap-year (divisible by 4 and 100 but not 400) produce the same day of the week as cal outputs', () => {
-    const dates = datesInYear1900
-    for (const date of dates) {
-      const year = Number(date.date.slice(0, 4)!)
-      const month = Number(date.date.slice(5, 7)!)
-      const day = Number(date.date.slice(8, 10)!)
-      const actual = findDayOfWeek(year, month, day)
-      expect(actual).toEqual(Weekday[date.dayOfWeek])
-    }
-  })
-
-  test('All dates in a leap year divisible by 400 produce the same day of the week as cal outputs', () => {
-    const dates = datesInYear2000
-    for (const date of dates) {
-      const year = Number(date.date.slice(0, 4)!)
-      const month = Number(date.date.slice(5, 7)!)
-      const day = Number(date.date.slice(8, 10)!)
-      const actual = findDayOfWeek(year, month, day)
-      expect(actual).toEqual(Weekday[date.dayOfWeek])
-    }
+  test('Days of the week are only supported (in this library) for the gregorian calendar, specifically from the point when London adopted it', () => {
+    expect(findDayOfWeek(1753, 1, 1)).toEqual(Weekday['Mo'])
+    expect(() => findDayOfWeek(1752, 12, 31)).toThrow()
   })
 })
