@@ -18,6 +18,8 @@ function zeroPad(part: number): string {
 }
 
 function isUtcInstantInLondonDST(utcYear: number, utcMonth: number, utcDay: number, utcHour: number): boolean {
+  if (utcYear <= 1996) throw RangeError('Years before 1996 (when London aligned to the EU) are not supported (yet)')
+
   // in a month with no discontinuity
   if (utcMonth < 3 || utcMonth > 10) return false
   if (utcMonth > 3 || utcDay < 10) return true
