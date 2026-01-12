@@ -1,6 +1,16 @@
 import { daysInMonth } from './leap-years'
 
-export function utcInstantToParts(utcInstant: string) {
+export interface DateParts {
+  year: number
+  month: number
+  day: number
+  hour: number
+  minute: number
+  second: number
+  fractional: string
+}
+
+export function utcInstantToParts(utcInstant: string): DateParts {
   // https://en.wikipedia.org/wiki/ISO_8601
   // Acceptable formats:
   // - 20251009T093500
@@ -32,7 +42,7 @@ export function utcInstantToParts(utcInstant: string) {
     fractional: '',
   }
   if (matches.rest) {
-    const restGroups = matches.rest.match(/(?<frac>\.[0-9]+)?(Z|\+00:?00|\+00)?^/)?.groups
+    const restGroups = matches.rest.match(/^(?<frac>\.[0-9]+)?(Z|\+00:?00|\+00)?$/)?.groups
     if (!restGroups) throw Error(`Error parsing UTC Instant: ${utcInstant}, specifically ${matches.rest}`)
     if (restGroups.frac) parts.fractional = restGroups.frac
   }

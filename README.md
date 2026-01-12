@@ -26,7 +26,7 @@ So this library appeared.
 ### What can this do?
 
 - UTC instant to London date
-- _(TODO)_ UTC instant to London date-time
+- UTC instant to London date-time
 - _(TODO)_ London date to UTC instant
 - _(TODO)_ London date-time to UTC instant
 - _(TODO)_ Formatting of dates and instants

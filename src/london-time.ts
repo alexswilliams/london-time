@@ -2,7 +2,7 @@
 
 import { findDayOfWeek } from './day-of-week'
 import { daysInMonth } from './leap-years'
-import { utcInstantToParts } from './parse'
+import { DateParts, utcInstantToParts } from './parse'
 
 export function utcTimestampToLondonDate(utcInstant: string): string {
   const parts = utcInstantToParts(utcInstant)
@@ -11,6 +11,18 @@ export function utcTimestampToLondonDate(utcInstant: string): string {
   if (!isDst) return utcToday
   if (isDst && parts.hour < 23) return utcToday
   return datePlusOneDay(parts.year, parts.month, parts.day)
+}
+
+export function utcTimestampToLondonDateTime(utcInstant: string): string {
+  const parts = utcInstantToParts(utcInstant)
+  const isDst = isUtcInstantInLondonDST(parts.year, parts.month, parts.day, parts.hour)
+  if (!isDst) return utcInstant
+  return instantPlusOneHour(parts)
+}
+
+function instantPlusOneHour(parts: DateParts): string {
+  if (parts.hour == 23) return datePlusOneDay(parts.year, parts.month, parts.day) + `T00:${zeroPad(parts.minute)}:${zeroPad(parts.second)}${parts.fractional}`
+  return `${parts.year}-${zeroPad(parts.month)}-${zeroPad(parts.day)}T${zeroPad(parts.hour + 1)}:${zeroPad(parts.minute)}:${zeroPad(parts.second)}${parts.fractional}`
 }
 
 function zeroPad(part: number): string {
