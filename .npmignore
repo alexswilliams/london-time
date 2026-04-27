@@ -1,0 +1,14 @@
+.idea
+.vscode
+node_modules
+*.iml
+tsconfig.tsbuildinfo
+src/**
+.editorconfig
+.gitignore
+.nvmrc
+package-lock.json
+.prettierignore
+.prettierrc
+Makefile
+tsconfig.json

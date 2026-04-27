@@ -1,7 +1,8 @@
 "use strict";
-// generated with `cal 2025` or similar
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.datesInYear2025 = exports.datesInYear2020 = exports.datesInYear2000 = exports.datesInYear1900 = void 0;
+const vitest_1 = require("vitest");
+// generated with `cal 2025` or similar
 const year1900CalOutput = `
                             1900
       January               February               March          
@@ -222,25 +223,25 @@ function zipWithNext(arr) {
 function zeroPad(day) {
     return day.length === 1 ? `0${day}` : day;
 }
-describe('Test Data sanity checks', () => {
-    test('All dates are accounted for', () => {
-        expect(exports.datesInYear2000).toHaveLength(366);
-        expect(exports.datesInYear1900).toHaveLength(365);
-        expect(exports.datesInYear2020).toHaveLength(366);
-        expect(exports.datesInYear2025).toHaveLength(365);
+(0, vitest_1.describe)('Test Data sanity checks', () => {
+    (0, vitest_1.test)('All dates are accounted for', () => {
+        (0, vitest_1.expect)(exports.datesInYear2000).toHaveLength(366);
+        (0, vitest_1.expect)(exports.datesInYear1900).toHaveLength(365);
+        (0, vitest_1.expect)(exports.datesInYear2020).toHaveLength(366);
+        (0, vitest_1.expect)(exports.datesInYear2025).toHaveLength(365);
     });
-    test('All dates are well-shaped', () => {
+    (0, vitest_1.test)('All dates are well-shaped', () => {
         for (const date of exports.datesInYear1900.map(it => it.date)) {
-            expect(date).toMatch(/1900-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
+            (0, vitest_1.expect)(date).toMatch(/1900-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
         }
         for (const date of exports.datesInYear2000.map(it => it.date)) {
-            expect(date).toMatch(/2000-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
+            (0, vitest_1.expect)(date).toMatch(/2000-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
         }
         for (const date of exports.datesInYear2020.map(it => it.date)) {
-            expect(date).toMatch(/2020-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
+            (0, vitest_1.expect)(date).toMatch(/2020-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
         }
         for (const date of exports.datesInYear2025.map(it => it.date)) {
-            expect(date).toMatch(/2025-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
+            (0, vitest_1.expect)(date).toMatch(/2025-(0[1-9]|10|11|12)-(0[1-9]|1[0-9]|2[0-9]|30|31)/);
         }
     });
 });
