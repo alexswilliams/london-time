@@ -2,7 +2,7 @@
   "name": "london-time",
   "version": "0.0.1",
   "description": "Parser and formatter for switching between London and UTC dates, times and instants",
-  "main": "src/london-time.ts",
+  "main": "dist/london-time.js",
   "scripts": {
     "src:build": "tsc --project tsconfig.json",
     "src:minify": "esbuild src/london-time.ts --minify --format=cjs --outfile=dist/london-time.min.js --target=chrome90,edge91,firefox89,ios14.0,safari14,node18 --analyze",
