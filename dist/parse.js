@@ -1,6 +1,8 @@
-import { daysInMonth } from './leap-years';
-export function utcInstantToParts(utcInstant) {
-    var _a, _b;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.utcInstantToParts = utcInstantToParts;
+const leap_years_1 = require("./leap-years");
+function utcInstantToParts(utcInstant) {
     // https://en.wikipedia.org/wiki/ISO_8601
     // Acceptable formats:
     // - 20251009T093500
@@ -19,7 +21,7 @@ export function utcInstantToParts(utcInstant) {
     // - times omitting T prefix (e.g. 20251009093500)
     // - times omitting minutes and seconds (because e.g. T10:59.5 becomes T10:59:30 which is not immediately obvious)
     const rx = /(?<year>[0-9]{4})-?(?<month>[0-9]{2})-?(?<day>[0-9]{2})T(?<hour>[0-9]{2}):?(?<minute>[0-9]{2}):?(?<second>[0-9]{2})(?<rest>.*)/;
-    const matches = (_a = utcInstant.match(rx)) === null || _a === void 0 ? void 0 : _a.groups;
+    const matches = utcInstant.match(rx)?.groups;
     if (!matches)
         throw Error(`Error parsing UTC Instant: ${utcInstant}`);
     const parts = {
@@ -32,7 +34,7 @@ export function utcInstantToParts(utcInstant) {
         fractional: '',
     };
     if (matches.rest) {
-        const restGroups = (_b = matches.rest.match(/(?<frac>\.[0-9]+)?(Z|\+00:?00|\+00)?^/)) === null || _b === void 0 ? void 0 : _b.groups;
+        const restGroups = matches.rest.match(/^(?<frac>\.[0-9]+)?(Z|\+00:?00|\+00)?$/)?.groups;
         if (!restGroups)
             throw Error(`Error parsing UTC Instant: ${utcInstant}, specifically ${matches.rest}`);
         if (restGroups.frac)
@@ -40,8 +42,7 @@ export function utcInstantToParts(utcInstant) {
     }
     if (parts.month < 1 || parts.month > 12 || parts.day < 0 || parts.hour > 23 || parts.minute > 59 || parts.second > 60)
         throw Error(`Error parsing UTC Instant: ${utcInstant}, component is impossible`);
-    if (parts.day > daysInMonth(parts.year, parts.month))
+    if (parts.day > (0, leap_years_1.daysInMonth)(parts.year, parts.month))
         throw Error(`Error parsing UTC Instant: ${utcInstant}, ${parts.year}-${parts.month} does not have a day ${parts.day}`);
     return parts;
 }
-//# sourceMappingURL=parse.js.map
