@@ -3,7 +3,7 @@ BUILD_DEPS = Makefile package.json package-lock.json tsconfig.json src/package.j
 .PHONY: all test clean release
 .DEFAULT: all
 
-all: dist/london-time.js dist/london-time.min.js dist/london-time.d.ts test
+all: dist/london-time.js dist/london-time.min.js dist/london-time.d.ts test dist/README.md dist/package.json
 
 dist/README.md: README.md
 	cp README.md dist/
