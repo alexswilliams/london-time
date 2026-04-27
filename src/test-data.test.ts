@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest'
 // generated with `cal 2025` or similar
 
 const year1900CalOutput = `

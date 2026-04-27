@@ -6,7 +6,7 @@
   "scripts": {
     "src:build": "tsc --project tsconfig.json",
     "src:minify": "esbuild src/london-time.ts --minify --sourcemap --format=cjs --outfile=dist/london-time.min.js --target=chrome90,edge91,firefox89,ios14.0,safari14,node18 --analyze",
-    "src:test": "jest src/**.test.*",
+    "src:test": "vitest src/**.test.*",
     "test": "npm run src:test"
   },
   "workspaces": [
@@ -16,11 +16,9 @@
   "license": "MIT",
   "devDependencies": {
     "@tsconfig/node22": "22.0.5",
-    "@types/jest": "30.0.0",
     "esbuild": "0.28.0",
-    "jest": "30.3.0",
     "prettier": "3.8.3",
-    "ts-jest": "29.4.9",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vitest": "4.1.5"
   }
 }

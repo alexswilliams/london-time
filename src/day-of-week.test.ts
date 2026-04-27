@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest'
 import { findDayOfWeek } from './day-of-week'
 import { datesInYear1900, datesInYear2000, datesInYear2020, datesInYear2025 } from './test-data.test'
 
