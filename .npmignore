@@ -12,3 +12,4 @@ package-lock.json
 .prettierrc
 Makefile
 tsconfig.json
+.github
